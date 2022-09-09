@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             ),
             body: Builder(builder: (context) {
               if (currentIndex == 0) {
-                return const ShopListPage();
+                return ShopListPage();
               }
               if (currentIndex == 1) {
                 return const YourProductsPage();
