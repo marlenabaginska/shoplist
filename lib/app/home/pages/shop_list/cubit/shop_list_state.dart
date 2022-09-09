@@ -7,7 +7,7 @@ class ShopListState {
 
 @immutable
 class ProductState {
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> products;
+  final List<ProductModel> products;
 
   const ProductState({
     required this.products,

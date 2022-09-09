@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoplist/app/home/pages/shop_list/cubit/categories/categories_widget.dart';
 import 'package:shoplist/app/home/pages/shop_list/cubit/shop_list_cubit.dart';
+import 'package:shoplist/app/repositories/products_repositories.dart';
 
 class ShopListPage extends StatefulWidget {
   const ShopListPage({
@@ -13,9 +14,9 @@ class ShopListPage extends StatefulWidget {
 }
 
 class _ShopListPageState extends State<ShopListPage> {
-  var productGroup = 'Mięso';
-  var productName = '';
-  var productQuantity = '';
+  String? productGroup;
+  String? productName;
+  String? productQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -97,21 +98,22 @@ class _ShopListPageState extends State<ShopListPage> {
                               style: TextStyle(color: Colors.black),
                             )),
                         BlocProvider(
-                          create: (context) => ShopListCubit(),
+                          create: (context) =>
+                              ShopListCubit(ProductsRepository()),
                           child: BlocBuilder<ShopListCubit, ShopListState>(
                             builder: (context, state) {
                               return ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black),
-                                onPressed: productGroup.isEmpty ||
-                                        productName.isEmpty ||
-                                        productQuantity.isEmpty
+                                onPressed: productGroup == null ||
+                                        productName == null ||
+                                        productQuantity == null
                                     ? null
                                     : () {
                                         context.read<ShopListCubit>().add(
-                                              productGroup: productGroup,
-                                              productName: productName,
-                                              productQuantity: productQuantity,
+                                              productGroup!,
+                                              productName!,
+                                              productQuantity!,
                                             );
                                         Navigator.pop(context);
                                       },
@@ -126,14 +128,35 @@ class _ShopListPageState extends State<ShopListPage> {
                 }),
             child: const Text('Dodaj produkt do listy'),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('Mięso'),
-              CategoriesWidget(categoriesName: 'Mięso'),
-              Text('Warzywa'),
-              CategoriesWidget(categoriesName: 'Warzywa'),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 15),
+                Container(
+                  decoration: const BoxDecoration(color: Colors.grey),
+                  child: Column(
+                    children: const [
+                      Text('Mięso'),
+                      CategoriesWidget(categoriesName: 'Mięso'),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: const BoxDecoration(color: Colors.grey),
+                  child: Column(
+                    children: const [
+                      Text('Warzywa'),
+                      CategoriesWidget(categoriesName: 'Warzywa'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

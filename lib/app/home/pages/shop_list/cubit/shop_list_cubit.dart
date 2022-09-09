@@ -3,55 +3,48 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
+import 'package:shoplist/app/models/product_model.dart';
+import 'package:shoplist/app/repositories/products_repositories.dart';
 
 part 'shop_list_state.dart';
 
 class ShopListCubit extends Cubit<ShopListState> {
-  ShopListCubit()
+  ShopListCubit(this._productsRepository)
       : super(
           const ShopListState(),
         );
 
-  Future<void> add({
-    required String productGroup,
-    required String productName,
-    required String productQuantity,
-  }) async {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc('7bIAQqYKtnVz7987oq3WtQyW7Qz1')
-        .collection('products')
-        .add({
-      'product_group': productGroup,
-      'product_name': productName,
-      'product_quantity': productQuantity,
-    });
+  final ProductsRepository _productsRepository;
+
+  Future<void> add(
+    String productGroup,
+    String productName,
+    String productQuantity,
+  ) async {
+    try {
+      await _productsRepository.add(
+        productGroup,
+        productName,
+        productQuantity,
+      );
+      emit(const ShopListState());
+    } catch (error) {}
   }
 }
 
 class ProductCubit extends Cubit<ProductState> {
-  ProductCubit() : super(const ProductState(products: []));
+  ProductCubit(this._productsRepository)
+      : super(const ProductState(products: []));
 
   StreamSubscription? _streamSubscription;
 
+  final ProductsRepository _productsRepository;
+
   Future<void> start() async {
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('users')
-        .doc('7bIAQqYKtnVz7987oq3WtQyW7Qz1')
-        .collection('products')
-        .snapshots()
-        .listen((product) {
-      emit(ProductState(
-        products: product.docs,
-      ));
-    })
-      ..onError((error) {
-        emit(
-          const ProductState(
-            products: [],
-          ),
-        );
-      });
+    _streamSubscription =
+        _productsRepository.getProductsStream().listen((products) {
+      emit(ProductState(products: products));
+    });
   }
 
   @override
