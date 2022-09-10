@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoplist/app/home/pages/shop_list/cubit/categories/categories_widget.dart';
-import 'package:shoplist/app/home/pages/shop_list/cubit/shop_list_cubit.dart';
+import 'package:numberpicker/numberpicker.dart';
+
+import 'package:shoplist/app/home/pages/shop_list/categories/categories_widget.dart';
+import 'package:shoplist/app/home/pages/shop_list/cubit/add_cubit.dart';
 import 'package:shoplist/app/repositories/products_repositories.dart';
 
 class ShopListPage extends StatefulWidget {
@@ -17,6 +19,7 @@ class _ShopListPageState extends State<ShopListPage> {
   String? productGroup;
   String? productName;
   String? productQuantity;
+  int currentValue = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -37,29 +40,9 @@ class _ShopListPageState extends State<ShopListPage> {
                         textAlign: TextAlign.center,
                       ),
                       content: SizedBox(
-                        height: 200,
+                        height: 351,
                         child: Column(
                           children: [
-                            TextField(
-                              decoration: const InputDecoration(
-                                  label: Text('Nazwa produktu')),
-                              onChanged: (newProduct) {
-                                setState(() {
-                                  productName = newProduct;
-                                });
-                              },
-                              textAlign: TextAlign.center,
-                            ),
-                            TextField(
-                              decoration:
-                                  const InputDecoration(label: Text('Ilość')),
-                              onChanged: (newProduct) {
-                                setState(() {
-                                  productQuantity = newProduct;
-                                });
-                              },
-                              textAlign: TextAlign.center,
-                            ),
                             DropdownButtonFormField(
                               decoration: const InputDecoration(
                                   label: Text('Kategoria')),
@@ -85,6 +68,43 @@ class _ShopListPageState extends State<ShopListPage> {
                                 },
                               ).toList(),
                             ),
+                            TextField(
+                              decoration: const InputDecoration(
+                                  label: Text('Nazwa produktu')),
+                              onChanged: (newProduct) {
+                                setState(() {
+                                  productName = newProduct;
+                                });
+                              },
+                              textAlign: TextAlign.center,
+                            ),
+                            //TextField(
+                            //decoration:
+                            //const InputDecoration(label: Text('Ilość')),
+                            //onChanged: (newProduct) {
+                            // setState(() {
+                            // productQuantity = newProduct;
+                            // });
+                            //},
+                            // textAlign: TextAlign.center,
+                            // ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: NumberPicker(
+                                    itemWidth: 40,
+                                    axis: Axis.horizontal,
+                                    value: currentValue,
+                                    minValue: 1,
+                                    maxValue: 100,
+                                    onChanged: (value) =>
+                                        setState(() => currentValue = value),
+                                  ),
+                                ),
+                                Text('Ilość: $currentValue'),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -98,22 +118,22 @@ class _ShopListPageState extends State<ShopListPage> {
                               style: TextStyle(color: Colors.black),
                             )),
                         BlocProvider(
-                          create: (context) =>
-                              ShopListCubit(ProductsRepository()),
-                          child: BlocBuilder<ShopListCubit, ShopListState>(
+                          create: (context) => AddCubit(ProductsRepository()),
+                          child: BlocBuilder<AddCubit, AddState>(
                             builder: (context, state) {
                               return ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black),
                                 onPressed: productGroup == null ||
-                                        productName == null ||
-                                        productQuantity == null
+                                        productName == null // ||
+                                    //productQuantity == null
                                     ? null
                                     : () {
-                                        context.read<ShopListCubit>().add(
+                                        context.read<AddCubit>().add(
                                               productGroup!,
                                               productName!,
-                                              productQuantity!,
+                                              //productQuantity!,
+                                              currentValue,
                                             );
                                         Navigator.pop(context);
                                       },

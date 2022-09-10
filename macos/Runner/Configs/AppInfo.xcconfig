@@ -8,7 +8,7 @@
 PRODUCT_NAME = shoplist
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.sebastiangirsza.shoplist
+PRODUCT_BUNDLE_IDENTIFIER = com.marlenabaginska.shoplist
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.sebastiangirsza. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.marlenabaginska. All rights reserved.

@@ -1,9 +1,4 @@
-part of 'shop_list_cubit.dart';
-
-@immutable
-class ShopListState {
-  const ShopListState();
-}
+part of 'product_cubit.dart';
 
 @immutable
 class ProductState {

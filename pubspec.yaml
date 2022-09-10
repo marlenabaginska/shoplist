@@ -40,6 +40,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   firebase_auth: ^3.7.0
   cloud_firestore: ^3.4.4
+  numberpicker: ^2.1.1
 
 dev_dependencies:
   flutter_test:

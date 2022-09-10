@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "773985023459",
-    "project_id": "shop-list-173011",
-    "storage_bucket": "shop-list-173011.appspot.com"
+    "project_number": "930373577132",
+    "project_id": "shoplist3008",
+    "storage_bucket": "shoplist3008.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:773985023459:android:9f11ec0e18974724221cd6",
+        "mobilesdk_app_id": "1:930373577132:android:e59b18d63f1b4435f8f209",
         "android_client_info": {
-          "package_name": "com.sebastiangirsza.shoplist"
+          "package_name": "com.marlenabaginska.shoplist"
         }
       },
       "oauth_client": [
         {
-          "client_id": "773985023459-vjg7gupaqd0g5flvflafo0s1735u570b.apps.googleusercontent.com",
+          "client_id": "930373577132-6hl7r32vuboood1j02dutaulsvfessms.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDb9cZhhmjLE--dktlRG-L0iBRfYeFEf1A"
+          "current_key": "AIzaSyCNFMaGNX4Hra0LDFdAdXoaIy1ypzszpWg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "773985023459-vjg7gupaqd0g5flvflafo0s1735u570b.apps.googleusercontent.com",
+              "client_id": "930373577132-6hl7r32vuboood1j02dutaulsvfessms.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

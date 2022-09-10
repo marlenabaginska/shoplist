@@ -6,31 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:shoplist/app/models/product_model.dart';
 import 'package:shoplist/app/repositories/products_repositories.dart';
 
-part 'shop_list_state.dart';
-
-class ShopListCubit extends Cubit<ShopListState> {
-  ShopListCubit(this._productsRepository)
-      : super(
-          const ShopListState(),
-        );
-
-  final ProductsRepository _productsRepository;
-
-  Future<void> add(
-    String productGroup,
-    String productName,
-    String productQuantity,
-  ) async {
-    try {
-      await _productsRepository.add(
-        productGroup,
-        productName,
-        productQuantity,
-      );
-      emit(const ShopListState());
-    } catch (error) {}
-  }
-}
+part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   ProductCubit(this._productsRepository)

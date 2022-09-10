@@ -18,7 +18,8 @@ class ProductsRepository {
         return ProductModel(
           productGroup: products['product_group'],
           productName: products['product_name'],
-          productQuantity: products['product_quantity'],
+          //productQuantity: products['product_quantity'],
+          currentValue: (products['product_value']),
           id: products.id,
         );
       }).toList();
@@ -28,7 +29,8 @@ class ProductsRepository {
   Future<void> add(
     String productGroup,
     String productName,
-    String productQuantity,
+    //String productQuantity,
+    int currentValue,
   ) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -41,7 +43,21 @@ class ProductsRepository {
         .add({
       'product_group': productGroup,
       'product_name': productName,
-      'product_quantity': productQuantity,
+      //'product_quantity': productQuantity,
+      'product_value': currentValue,
     });
+  }
+
+  Future<void> delete({required String id}) {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('products')
+        .doc(id)
+        .delete();
   }
 }

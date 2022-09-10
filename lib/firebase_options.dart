@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDb9cZhhmjLE--dktlRG-L0iBRfYeFEf1A',
-    appId: '1:773985023459:android:9f11ec0e18974724221cd6',
-    messagingSenderId: '773985023459',
-    projectId: 'shop-list-173011',
-    storageBucket: 'shop-list-173011.appspot.com',
+    apiKey: 'AIzaSyCNFMaGNX4Hra0LDFdAdXoaIy1ypzszpWg',
+    appId: '1:930373577132:android:e59b18d63f1b4435f8f209',
+    messagingSenderId: '930373577132',
+    projectId: 'shoplist3008',
+    storageBucket: 'shoplist3008.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCokzkVIMt_v1fq-H2MOqKtecaa2pKAn1Q',
-    appId: '1:773985023459:ios:647d0844a3ada0f2221cd6',
-    messagingSenderId: '773985023459',
-    projectId: 'shop-list-173011',
-    storageBucket: 'shop-list-173011.appspot.com',
-    iosClientId: '773985023459-bst3vs6iku5jh36ol3hrd0sehje8eblc.apps.googleusercontent.com',
-    iosBundleId: 'com.sebastiangirsza.shoplist',
+    apiKey: 'AIzaSyCwhYpZ_q_x-NhRECGMtf_Yk2us1iajtms',
+    appId: '1:930373577132:ios:2c17f7ccd1edc75cf8f209',
+    messagingSenderId: '930373577132',
+    projectId: 'shoplist3008',
+    storageBucket: 'shoplist3008.appspot.com',
+    iosClientId: '930373577132-41fg6je5ci8k5j00kcl22f627bc3d6p1.apps.googleusercontent.com',
+    iosBundleId: 'com.marlenabaginska.shoplist',
   );
 }
