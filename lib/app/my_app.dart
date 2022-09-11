@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoplist/app/cubit/root_cubit.dart';
+import 'package:shoplist/app/cubit/auth_cubit.dart';
+
 import 'package:shoplist/app/home/home_page.dart';
 import 'package:shoplist/app/login/login_page.dart';
+import 'package:shoplist/app/repositories/firebase_auth_repository.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -31,8 +33,8 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RootCubit()..root(),
-      child: BlocBuilder<RootCubit, RootState>(
+      create: (context) => AuthCubit(FirebaseAuthRespository())..start(),
+      child: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           final user = state.user;
           if (user == null) {

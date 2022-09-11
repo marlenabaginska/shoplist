@@ -18,7 +18,7 @@ class ShopListPage extends StatefulWidget {
 class _ShopListPageState extends State<ShopListPage> {
   String? productGroup;
   String? productName;
-  String? productQuantity;
+
   int currentValue = 1;
 
   @override
@@ -78,16 +78,6 @@ class _ShopListPageState extends State<ShopListPage> {
                               },
                               textAlign: TextAlign.center,
                             ),
-                            //TextField(
-                            //decoration:
-                            //const InputDecoration(label: Text('Ilość')),
-                            //onChanged: (newProduct) {
-                            // setState(() {
-                            // productQuantity = newProduct;
-                            // });
-                            //},
-                            // textAlign: TextAlign.center,
-                            // ),
                             Column(
                               children: [
                                 Padding(
@@ -124,19 +114,17 @@ class _ShopListPageState extends State<ShopListPage> {
                               return ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black),
-                                onPressed: productGroup == null ||
-                                        productName == null // ||
-                                    //productQuantity == null
-                                    ? null
-                                    : () {
-                                        context.read<AddCubit>().add(
-                                              productGroup!,
-                                              productName!,
-                                              //productQuantity!,
-                                              currentValue,
-                                            );
-                                        Navigator.pop(context);
-                                      },
+                                onPressed:
+                                    productGroup == null || productName == null
+                                        ? null
+                                        : () {
+                                            context.read<AddCubit>().add(
+                                                  productGroup!,
+                                                  productName!,
+                                                  currentValue,
+                                                );
+                                            Navigator.pop(context);
+                                          },
                                 child: const Text('Dodaj do listy'),
                               );
                             },

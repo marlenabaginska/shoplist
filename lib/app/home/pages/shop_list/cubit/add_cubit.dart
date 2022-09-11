@@ -15,14 +15,12 @@ class AddCubit extends Cubit<AddState> {
   Future<void> add(
     String productGroup,
     String productName,
-    //String productQuantity,
     int currentValue,
   ) async {
     try {
       await _productsRepository.add(
         productGroup,
         productName,
-        // productQuantity,
         currentValue,
       );
       emit(const AddState());

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoplist/app/cubit/root_cubit.dart';
+import 'package:shoplist/app/cubit/auth_cubit.dart';
 import 'package:shoplist/app/home/pages/recipes/recipes.dart';
 import 'package:shoplist/app/home/pages/shop_list/shop_list.dart';
 import 'package:shoplist/app/home/pages/your_products/your_products.dart';
+import 'package:shoplist/app/repositories/firebase_auth_repository.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -19,8 +20,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RootCubit()..root(),
-      child: BlocBuilder<RootCubit, RootState>(
+      create: (context) => AuthCubit(FirebaseAuthRespository())..start(),
+      child: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -111,12 +112,12 @@ class _SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RootCubit(),
-      child: BlocBuilder<RootCubit, RootState>(
+      create: (context) => AuthCubit(FirebaseAuthRespository()),
+      child: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           return ElevatedButton(
               onPressed: () {
-                context.read<RootCubit>().signOut();
+                context.read<AuthCubit>().logOut();
                 Navigator.of(context).pop();
               },
               child: const Text('Wyloguj'));

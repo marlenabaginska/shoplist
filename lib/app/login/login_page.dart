@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoplist/app/cubit/root_cubit.dart';
+import 'package:shoplist/app/cubit/auth_cubit.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () async {
                   if (isCreatingAccount == true) {
                     try {
-                      context.read<RootCubit>().logIn(
+                      context.read<AuthCubit>().createUser(
                             email: widget.emailController.text,
                             password: widget.passwordController.text,
                           );
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   } else {
                     try {
-                      context.read<RootCubit>().signIn(
+                      context.read<AuthCubit>().logIn(
                             email: widget.emailController.text,
                             password: widget.passwordController.text,
                           );

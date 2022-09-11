@@ -18,7 +18,6 @@ class ProductsRepository {
         return ProductModel(
           productGroup: products['product_group'],
           productName: products['product_name'],
-          //productQuantity: products['product_quantity'],
           currentValue: (products['product_value']),
           id: products.id,
         );
@@ -29,7 +28,6 @@ class ProductsRepository {
   Future<void> add(
     String productGroup,
     String productName,
-    //String productQuantity,
     int currentValue,
   ) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
@@ -43,7 +41,6 @@ class ProductsRepository {
         .add({
       'product_group': productGroup,
       'product_name': productName,
-      //'product_quantity': productQuantity,
       'product_value': currentValue,
     });
   }
