@@ -95,7 +95,7 @@ class _ProductsList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(productModel.productName),
-              Text(productModel.currentValue.toString()),
+              Text(productModel.productQuantity.toString()),
             ],
           ),
         ),

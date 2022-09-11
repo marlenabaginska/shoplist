@@ -18,7 +18,7 @@ class ProductsRepository {
         return ProductModel(
           productGroup: products['product_group'],
           productName: products['product_name'],
-          currentValue: (products['product_value']),
+          productQuantity: (products['product_value']),
           id: products.id,
         );
       }).toList();
@@ -28,7 +28,7 @@ class ProductsRepository {
   Future<void> add(
     String productGroup,
     String productName,
-    int currentValue,
+    int productQuantity,
   ) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -41,7 +41,7 @@ class ProductsRepository {
         .add({
       'product_group': productGroup,
       'product_name': productName,
-      'product_value': currentValue,
+      'product_value': productQuantity,
     });
   }
 
