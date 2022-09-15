@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Shop List',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-      ),
+          scaffoldBackgroundColor: const Color.fromARGB(221, 22, 24, 24),
+          primarySwatch: Colors.teal,
+          brightness: Brightness.dark),
       home: const RootPage(),
     );
   }
