@@ -21,6 +21,7 @@ class ProductsRepository {
           productName: products['product_name'],
           productQuantity: (products['product_value']),
           id: products.id,
+          isChecked: (products['product_check']),
         );
       }).toList();
     });
@@ -36,10 +37,11 @@ class ProductsRepository {
         .map((querySnapshots) {
       return querySnapshots.docs.map((purchasedProducts) {
         return PurchasedProductModel(
-            productGroup: purchasedProducts['product_group'],
-            productName: purchasedProducts['product_name'],
-            productQuantity: (purchasedProducts['product_quantity']),
-            id: purchasedProducts.id);
+            purchasedProductGroup: purchasedProducts['product_group'],
+            purchasedProductName: purchasedProducts['product_name'],
+            purchasedProductQuantity: (purchasedProducts['product_quantity']),
+            id: purchasedProducts.id,
+            storageName: purchasedProducts['storage_name']);
       }).toList();
     });
   }
@@ -48,6 +50,7 @@ class ProductsRepository {
     String productGroup,
     String productName,
     int productQuantity,
+    bool isChecked,
   ) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -61,13 +64,15 @@ class ProductsRepository {
       'product_group': productGroup,
       'product_name': productName,
       'product_value': productQuantity,
+      'product_check': isChecked,
     });
   }
 
   Future<void> addYourProduct(
-    String productGroup,
-    String productName,
-    int productQuantity,
+    String purchasedProductGroup,
+    String purchasedProductName,
+    int purchasedProductQuantity,
+    String storageName,
   ) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -78,9 +83,10 @@ class ProductsRepository {
         .doc(userID)
         .collection('purchased_products')
         .add({
-      'product_group': productGroup,
-      'product_name': productName,
-      'product_quantity': productQuantity,
+      'product_group': purchasedProductGroup,
+      'product_name': purchasedProductName,
+      'product_quantity': purchasedProductQuantity,
+      'storage_name': storageName,
     });
   }
 
@@ -93,6 +99,19 @@ class ProductsRepository {
         .collection('users')
         .doc(userID)
         .collection('products')
+        .doc(id)
+        .delete();
+  }
+
+  Future<void> deletePurchasedProduct({required String id}) {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('Użytkownik nie jest zalogowany');
+    }
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('purchased_products')
         .doc(id)
         .delete();
   }

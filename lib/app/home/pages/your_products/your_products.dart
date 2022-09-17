@@ -9,128 +9,62 @@ class YourProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: ListView(
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const StoragePage(storageName: 'Lodówka'),
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 5, 53, 56),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Lodówka'),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Icon(Icons.kitchen_outlined)
-                  ]),
-            ),
-          ),
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    const StoragePage(storageName: 'Zamrażarka'),
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 5, 53, 56),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Zamrażarka'),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Icon(Icons.ac_unit_rounded)
-                  ]),
-            ),
-          ),
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const StoragePage(storageName: 'Szafka'),
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 5, 53, 56),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Szafka'),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Icon(Icons.door_sliding_outlined)
-                  ]),
-            ),
-          ),
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const StoragePage(storageName: 'Chemia'),
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 5, 53, 56),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Chemia'),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Icon(Icons.local_laundry_service_outlined)
-                  ]),
-            ),
-          ),
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const StoragePage(storageName: 'Inne'),
-              ));
-            },
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 5, 53, 56),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Inne'),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Icon(Icons.more_horiz_outlined)
-                  ]),
-            ),
-          ),
-          const SizedBox(height: 10),
-        ],
-      ),
-    );
+    final icon = [
+      Icons.kitchen_outlined,
+      Icons.ac_unit_rounded,
+      Icons.door_sliding_outlined,
+      Icons.local_laundry_service_outlined,
+      Icons.more_horiz_outlined,
+    ];
+
+    final storageNames = [
+      'Lodówka',
+      'Zamrażarka',
+      'Szafka kuchenna',
+      'Chemia',
+      'Inne',
+    ];
+    final routes = [
+      const StoragePage(storageName: 'Lodówka'),
+      const StoragePage(storageName: 'Zamrażarka'),
+      const StoragePage(storageName: 'Szafka kuchenna'),
+      const StoragePage(storageName: 'Chemia'),
+      const StoragePage(storageName: 'Inne'),
+    ];
+    return Scaffold(
+        body: ListView.builder(
+      itemCount: storageNames.length,
+      itemBuilder: (context, index) {
+        return SizedBox(
+            height: 65,
+            child: Column(children: [
+              const SizedBox(height: 15),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      fullscreenDialog: true, builder: (_) => routes[index]));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(13),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 5, 53, 56),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(storageNames[index]),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Icon(icon[index])
+                        ]),
+                  ),
+                ),
+              ),
+            ]));
+      },
+    ));
   }
 }

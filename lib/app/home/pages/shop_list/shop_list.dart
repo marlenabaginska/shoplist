@@ -20,52 +20,14 @@ class _ShopListPageState extends State<ShopListPage> {
   String? productName;
 
   int productQuantity = 1;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 15),
-                Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Color.fromARGB(255, 5, 53, 56)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: Column(
-                      children: const [
-                        Text(style: TextStyle(fontSize: 17), 'Mięso'),
-                        CategoriesWidget(categoriesName: 'Mięso'),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Color.fromARGB(255, 5, 53, 56)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: Column(
-                      children: const [
-                        Text(style: TextStyle(fontSize: 17), 'Warzywa'),
-                        CategoriesWidget(categoriesName: 'Warzywa'),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const _ProductGroup(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 70),
             child: Padding(
@@ -170,6 +132,7 @@ class _ShopListPageState extends State<ShopListPage> {
                                                   productGroup!,
                                                   productName!,
                                                   productQuantity,
+                                                  isChecked,
                                                 );
                                             Navigator.pop(context);
                                           },
@@ -186,7 +149,7 @@ class _ShopListPageState extends State<ShopListPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text(
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.black, fontSize: 15),
                         'Dodaj produkt do listy'),
                     SizedBox(
                       width: 5,
@@ -200,5 +163,55 @@ class _ShopListPageState extends State<ShopListPage> {
         ],
       ),
     );
+  }
+}
+
+class _ProductGroup extends StatelessWidget {
+  const _ProductGroup({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final categoriesName = [
+      'Warzywa',
+      'Mięso',
+    ];
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: categoriesName.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 15),
+                Container(
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Color.fromARGB(255, 5, 53, 56)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: Column(
+                      children: [
+                        ExpansionTile(
+                          title: Text(
+                              style: const TextStyle(fontSize: 17),
+                              categoriesName[index]),
+                          children: [
+                            CategoriesWidget(
+                              categoriesName: categoriesName[index],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

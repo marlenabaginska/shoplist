@@ -24,16 +24,17 @@ class YourProductsCubit extends Cubit<YourProductsState> {
   }
 
   Future<void> addYourProduct(
-    String productGroup,
-    String productName,
-    int productQuantity,
-    String s,
+    String purchasedProductGroup,
+    String purchasedProductName,
+    int purchasedProductQuantity,
+    String storageName,
   ) async {
     try {
       await _productsRepository.addYourProduct(
-        productGroup,
-        productName,
-        productQuantity,
+        purchasedProductGroup,
+        purchasedProductName,
+        purchasedProductQuantity,
+        storageName,
       );
       emit(const YourProductsState());
     } catch (error) {}
